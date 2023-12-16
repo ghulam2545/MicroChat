@@ -1,56 +1,51 @@
 package com.ghulam.mitter.controller;
 
-import com.ghulam.mitter.converter.UserDtoToUser;
-import com.ghulam.mitter.converter.UserToUserDto;
+import com.ghulam.mitter.converter.UserRequestDtoToUser;
+import com.ghulam.mitter.converter.UserToUserResponseDto;
 import com.ghulam.mitter.domain.User;
-import com.ghulam.mitter.dto.UserDto;
+import com.ghulam.mitter.dto.request.UserRequestDto;
+import com.ghulam.mitter.dto.response.UserResponseDto;
 import com.ghulam.mitter.service.UserService;
 import com.ghulam.mitter.system.Result;
 import com.ghulam.mitter.system.StatusCode;
-import com.ghulam.mitter.utils.IdGenerator;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
-    private final IdGenerator idGenerator;
-    private final UserToUserDto userToUserDto;
-    private final UserDtoToUser userDtoToUser;
+    private final UserRequestDtoToUser userRequestDtoToUser;
+    private final UserToUserResponseDto userToUserResponseDto;
 
-    public UserController(UserService userService, IdGenerator idGenerator, UserToUserDto userToUserDto, UserDtoToUser userDtoToUser) {
+    public UserController(UserService userService, UserRequestDtoToUser userRequestDtoToUser, UserToUserResponseDto userToUserResponseDto) {
         this.userService = userService;
-        this.idGenerator = idGenerator;
-        this.userToUserDto = userToUserDto;
-        this.userDtoToUser = userDtoToUser;
+        this.userRequestDtoToUser = userRequestDtoToUser;
+        this.userToUserResponseDto = userToUserResponseDto;
     }
 
+
     @PostMapping
-    public Result addUser(@RequestBody UserDto userDto) {
-        User user = userDtoToUser.convert(userDto);
-
-        final long id = idGenerator.nextId();
-        assert user != null;
-        user.setUserId(id + "");
-
+    public Result addUser(@RequestBody UserRequestDto userRequestDto) {
+        User user = userRequestDtoToUser.convert(userRequestDto);
         User savedUser = userService.save(user);
-        UserDto savedUserDto = userToUserDto.convert(savedUser);
-        return new Result(true, StatusCode.SUCCESS, "message - addUser", savedUserDto);
+        UserResponseDto savedUserResponseDto = userToUserResponseDto.convert(savedUser);
+        return new Result(true, StatusCode.SUCCESS, "message - addUser", savedUserResponseDto);
     }
 
     @GetMapping("/{userId}")
     public Result getUserById(@PathVariable String userId) {
         User user = userService.findById(userId);
-        UserDto userDto = userToUserDto.convert(user);
-        return new Result(true, StatusCode.SUCCESS, "message - getUserById", userDto);
+        UserResponseDto userResponseDto = userToUserResponseDto.convert(user);
+        return new Result(true, StatusCode.SUCCESS, "message - getUserById", userResponseDto);
     }
 
     @PutMapping("/{userId}")
-    public Result updateUser(@PathVariable String userId, @RequestBody UserDto userDto) {
-        User user = userDtoToUser.convert(userDto);
+    public Result updateUser(@PathVariable String userId, @RequestBody UserRequestDto userRequestDto) {
+        User user = userRequestDtoToUser.convert(userRequestDto);
         User updatedUser = userService.update(userId, user);
-        UserDto updatedUserDto = userToUserDto.convert(updatedUser);
-        return new Result(true, StatusCode.SUCCESS, "message - updateUser", updatedUserDto);
+        UserResponseDto updatedUserResponseDto = userToUserResponseDto.convert(updatedUser);
+        return new Result(true, StatusCode.SUCCESS, "message - updateUser", updatedUserResponseDto);
     }
 
     @DeleteMapping("/{userId}")
@@ -59,8 +54,11 @@ public class UserController {
         return new Result(true, StatusCode.SUCCESS, "message - deleteUser");
     }
 
+    @GetMapping
     public Result getAllUser() {
-        /* todo - implement pagination etc */
+        List<User> allUsers = userService.findAll();
+
+        // todo
         return null;
     }
 }

@@ -1,7 +1,6 @@
 package com.ghulam.mitter.service;
 
 import com.ghulam.mitter.domain.User;
-
 import java.util.List;
 
 public interface UserService {

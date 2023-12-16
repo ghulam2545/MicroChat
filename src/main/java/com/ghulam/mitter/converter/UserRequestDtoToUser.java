@@ -1,14 +1,18 @@
 package com.ghulam.mitter.converter;
 
 import com.ghulam.mitter.domain.User;
-import com.ghulam.mitter.dto.UserDto;
+import com.ghulam.mitter.dto.request.UserRequestDto;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+@Getter
+@Setter
 @Component
-public class UserDtoToUser implements Converter<UserDto, User> {
+public class UserRequestDtoToUser implements Converter<UserRequestDto, User> {
     @Override
-    public User convert(UserDto source) {
+    public User convert(UserRequestDto source) {
         User user = new User();
 
         user.setUsername(source.getUsername());

@@ -1,9 +1,6 @@
 package com.ghulam.mitter.controller;
 
-import com.ghulam.mitter.converter.UserDtoToUser;
-import com.ghulam.mitter.converter.UserToUserDto;
 import com.ghulam.mitter.domain.User;
-import com.ghulam.mitter.dto.UserDto;
 import com.ghulam.mitter.service.UserService;
 import com.ghulam.mitter.system.Result;
 import com.ghulam.mitter.system.StatusCode;

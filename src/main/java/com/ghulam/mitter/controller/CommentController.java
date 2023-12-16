@@ -1,9 +1,6 @@
 package com.ghulam.mitter.controller;
 
-import com.ghulam.mitter.converter.CommentDtoToComment;
-import com.ghulam.mitter.converter.CommentToCommentDto;
 import com.ghulam.mitter.domain.Comment;
-import com.ghulam.mitter.dto.CommentDto;
 import com.ghulam.mitter.service.CommentService;
 import com.ghulam.mitter.system.Result;
 import com.ghulam.mitter.system.StatusCode;
