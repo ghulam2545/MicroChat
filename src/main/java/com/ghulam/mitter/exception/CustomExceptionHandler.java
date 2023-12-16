@@ -11,4 +11,9 @@ public class CustomExceptionHandler {
     public Result userNotFoundException(UserNotFoundException ex) {
         return new Result(false, StatusCode.NOT_FOUND, "user not found");
     }
+
+    @ExceptionHandler(CommentNotFoundException.class)
+    public Result commentNotFoundException(CommentNotFoundException ex) {
+        return new Result(false, StatusCode.NOT_FOUND, "comment not found");
+    }
 }

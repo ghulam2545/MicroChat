@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
             oldUser.setCountry(user.getCountry());
             oldUser.setImageUrl(user.getImageUrl());
 
-            return userRepository.save(user);
+            return userRepository.save(oldUser);
         }).orElseThrow(() -> new UserNotFoundException("user not found"));
     }
 
@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
     public void delete(String userId) {
         userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("user not found"));
         userRepository.deleteById(userId);
-
     }
 
     @Override
