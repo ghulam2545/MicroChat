@@ -1,15 +1,16 @@
 package com.ghulam.mitter.dto.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
 
-@Getter
-@Setter
-public class UserResponseDto {
-    private String username;
-    private String email;
-    private String fullname;
-    private String description;
-    private String country;
-    private String imageUrl;
+public record UserResponseDto(
+        String userId,
+        String username,
+        String email,
+        String fullname,
+        String description,
+        String country,
+        String imageUrl,
+        List<String> tweetIds,
+        List<String> commentIds
+) {
 }

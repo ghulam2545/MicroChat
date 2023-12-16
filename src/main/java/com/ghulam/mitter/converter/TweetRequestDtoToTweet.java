@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 public class TweetRequestDtoToTweet implements Converter<TweetRequestDto, Tweet> {
     @Override
     public Tweet convert(TweetRequestDto source) {
-        return null;
+        Tweet tweet = new Tweet();
+
+        tweet.setContent(source.content());
+        tweet.setMediaUrl(source.mediaUrl());
+        tweet.setHashtags(source.hashtags());
+
+        return tweet;
     }
 }

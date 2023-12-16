@@ -13,15 +13,17 @@ import org.springframework.stereotype.Component;
 public class UserToUserResponseDto implements Converter<User, UserResponseDto> {
     @Override
     public UserResponseDto convert(User source) {
-        UserResponseDto dto = new UserResponseDto();
-
-        dto.setUsername(source.getUsername());
-        dto.setEmail(source.getEmail());
-        dto.setFullname(source.getFullname());
-        dto.setDescription(source.getDescription());
-        dto.setCountry(source.getCountry());
-        dto.setImageUrl(source.getImageUrl());
-
-        return dto;
+        return new UserResponseDto(
+                source.getUserId(),
+                source.getUsername(),
+                source.getEmail(),
+                source.getFullname(),
+                source.getDescription(),
+                source.getCountry(),
+                source.getImageUrl(),
+                // todo
+                null,
+                null
+        );
     }
 }

@@ -1,7 +1,6 @@
 package com.ghulam.mitter.service.impl;
 
 import com.ghulam.mitter.domain.User;
-import com.ghulam.mitter.exception.UserNotFoundException;
 import com.ghulam.mitter.repository.UserRepository;
 import com.ghulam.mitter.service.UserService;
 import com.ghulam.mitter.utils.IdGenerator;
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(String userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("user not found"));
+        return userRepository.findById(userId).orElseThrow( /* handle exception */ );
     }
 
     @Override
@@ -41,12 +40,12 @@ public class UserServiceImpl implements UserService {
             oldUser.setImageUrl(user.getImageUrl());
 
             return userRepository.save(oldUser);
-        }).orElseThrow(() -> new UserNotFoundException("user not found"));
+        }).orElseThrow( /* handle exception */ );
     }
 
     @Override
     public void delete(String userId) {
-        userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("user not found"));
+        userRepository.findById(userId).orElseThrow( /* handle exception */ );
         userRepository.deleteById(userId);
     }
 

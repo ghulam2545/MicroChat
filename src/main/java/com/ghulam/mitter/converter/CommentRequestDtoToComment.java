@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 public class CommentRequestDtoToComment implements Converter<CommentRequestDto, Comment> {
     @Override
     public Comment convert(CommentRequestDto source) {
-        return null;
+        Comment comment = new Comment();
+
+        comment.setContent(source.content());
+
+        return comment;
     }
 }

@@ -59,6 +59,6 @@ public class UserController {
         List<User> allUsers = userService.findAll();
 
         // todo
-        return null;
+        return new Result(true, StatusCode.SUCCESS, "message - getAllUser", allUsers);
     }
 }

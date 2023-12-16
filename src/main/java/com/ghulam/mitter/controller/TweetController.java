@@ -9,7 +9,6 @@ import com.ghulam.mitter.service.TweetService;
 import com.ghulam.mitter.system.Result;
 import com.ghulam.mitter.system.StatusCode;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -27,10 +26,9 @@ public class TweetController {
 
     @PostMapping
     public Result addTweet(@RequestBody TweetRequestDto tweetRequestDto) {
-        final String userId = tweetRequestDto.getTweeter();
         Tweet tweet = tweetRequestDtoToTweet.convert(tweetRequestDto);
 
-        Tweet savedTweet = tweetService.save(userId, tweet);
+        Tweet savedTweet = tweetService.save(tweet);
         TweetResponseDto savedTweetResponseDto = tweetToTweetResponseDto.convert(savedTweet);
         return new Result(true, StatusCode.SUCCESS, "message - addTweet", savedTweetResponseDto);
     }
@@ -61,6 +59,6 @@ public class TweetController {
         List<Tweet> allTweet = tweetService.findAll();
 
         // todo
-        return null;
+        return new Result(true, StatusCode.SUCCESS, "message - getAllTweet", allTweet);
     }
 }

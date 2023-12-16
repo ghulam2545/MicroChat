@@ -1,48 +1,53 @@
 package com.ghulam.mitter.controller;
 
+import com.ghulam.mitter.converter.CommentRequestDtoToComment;
+import com.ghulam.mitter.converter.CommentToCommentResponseDto;
 import com.ghulam.mitter.domain.Comment;
+import com.ghulam.mitter.dto.request.CommentRequestDto;
+import com.ghulam.mitter.dto.response.CommentResponseDto;
 import com.ghulam.mitter.service.CommentService;
 import com.ghulam.mitter.system.Result;
 import com.ghulam.mitter.system.StatusCode;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
     private final CommentService commentService;
-    private final CommentToCommentDto commentToCommentDto;
-    private final CommentDtoToComment commentDtoToComment;
+    private final CommentRequestDtoToComment commentRequestDtoToComment;
+    private final CommentToCommentResponseDto commentToCommentResponseDto;
 
-    public CommentController(CommentService commentService, CommentToCommentDto commentToCommentDto, CommentDtoToComment commentDtoToComment) {
+    public CommentController(CommentService commentService,
+                             CommentRequestDtoToComment commentRequestDtoToComment,
+                             CommentToCommentResponseDto commentToCommentResponseDto) {
+
         this.commentService = commentService;
-        this.commentToCommentDto = commentToCommentDto;
-        this.commentDtoToComment = commentDtoToComment;
+        this.commentRequestDtoToComment = commentRequestDtoToComment;
+        this.commentToCommentResponseDto = commentToCommentResponseDto;
     }
 
-    @PostMapping("/{tweetId}")
-    public Result addComment(@PathVariable String tweetId, @RequestBody CommentDto commentDto) {
-        // todo
-        Comment comment = commentDtoToComment.convert(commentDto);
+    @PostMapping
+    public Result addComment(@RequestBody CommentRequestDto commentRequestDto) {
+        Comment comment = commentRequestDtoToComment.convert(commentRequestDto);
         Comment savedComment = commentService.save(comment);
-        CommentDto savedCommentDto = commentToCommentDto.convert(savedComment);
-        return new Result(true, StatusCode.SUCCESS, "message - addComment", savedCommentDto);
+        CommentResponseDto savedCommentResponseDto = commentToCommentResponseDto.convert(savedComment);
+        return new Result(true, StatusCode.SUCCESS, "message - addComment", savedCommentResponseDto);
     }
 
     @GetMapping("/{commentId}")
     public Result getCommentById(@PathVariable String commentId) {
         Comment comment = commentService.findById(commentId);
-        CommentDto commentDto = commentToCommentDto.convert(comment);
-        return new Result(true, StatusCode.SUCCESS, "message - getCommentById", commentDto);
+        CommentResponseDto commentResponseDto = commentToCommentResponseDto.convert(comment);
+        return new Result(true, StatusCode.SUCCESS, "message - getCommentById", commentResponseDto);
     }
 
     @PutMapping("/{commentId}")
-    public Result updateComment(@PathVariable String commentId, @RequestBody CommentDto commentDto) {
-        Comment comment = commentDtoToComment.convert(commentDto);
+    public Result updateComment(@PathVariable String commentId, @RequestBody CommentRequestDto commentRequestDto) {
+        Comment comment = commentRequestDtoToComment.convert(commentRequestDto);
         Comment updatedComment = commentService.update(commentId, comment);
-        CommentDto updatedCommentDto = commentToCommentDto.convert(updatedComment);
-        return new Result(true, StatusCode.SUCCESS, "message - updateComment", updatedCommentDto);
+        CommentResponseDto updatedCommentResponseDto = commentToCommentResponseDto.convert(updatedComment);
+        return new Result(true, StatusCode.SUCCESS, "message - updateComment", updatedCommentResponseDto);
     }
 
     @DeleteMapping("/{commentId}")
@@ -52,8 +57,10 @@ public class CommentController {
     }
 
     @GetMapping
-    public List<Comment> getAllComment() {
+    public Result getAllComment() {
+        List<Comment> allComment = commentService.findAll();
+
         // todo
-        return null;
+        return new Result(true, StatusCode.SUCCESS, "message - getAllComment", allComment);
     }
 }

@@ -1,4 +1,6 @@
 package com.ghulam.mitter.dto.request;
 
-public class CommentRequestDto {
+public record CommentRequestDto(
+        String content
+) {
 }

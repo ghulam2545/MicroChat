@@ -16,14 +16,12 @@ public class Tweet {
     private String content;
     private String mediaUrl;
     private LocalDateTime timestamp;
-
-    @ElementCollection
-    private List<String> hashtags = new ArrayList<>();
+    private String hashtags;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User tweeter;
+    private User userId;
 
-    @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tweetId", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }

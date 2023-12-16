@@ -1,4 +1,12 @@
 package com.ghulam.mitter.dto.response;
 
-public class CommentResponseDto {
+import java.time.LocalDateTime;
+
+public record CommentResponseDto(
+        String commentId,
+        String content,
+        LocalDateTime timestamp,
+        String userId,
+        String tweetId
+) {
 }

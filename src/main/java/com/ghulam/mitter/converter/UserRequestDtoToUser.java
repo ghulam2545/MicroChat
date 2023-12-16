@@ -15,13 +15,13 @@ public class UserRequestDtoToUser implements Converter<UserRequestDto, User> {
     public User convert(UserRequestDto source) {
         User user = new User();
 
-        user.setUsername(source.getUsername());
-        user.setEmail(source.getEmail());
-        user.setPassword(source.getPassword());
-        user.setFullname(source.getFullname());
-        user.setDescription(source.getDescription());
-        user.setCountry(source.getCountry());
-        user.setImageUrl(source.getImageUrl());
+        user.setUsername(source.username());
+        user.setEmail(source.email());
+        user.setPassword(source.password());
+        user.setFullname(source.fullname());
+        user.setDescription(source.description());
+        user.setCountry(source.country());
+        user.setImageUrl(source.imageUrl());
 
         return user;
     }

@@ -22,9 +22,9 @@ public class User {
     private String country;
     private String imageUrl;
 
-    @OneToMany(mappedBy = "tweeter", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Tweet> tweets;
 
-    @OneToMany(mappedBy = "commenter", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }

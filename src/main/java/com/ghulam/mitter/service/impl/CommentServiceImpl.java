@@ -1,7 +1,6 @@
 package com.ghulam.mitter.service.impl;
 
 import com.ghulam.mitter.domain.Comment;
-import com.ghulam.mitter.exception.CommentNotFoundException;
 import com.ghulam.mitter.repository.CommentRepository;
 import com.ghulam.mitter.service.CommentService;
 import com.ghulam.mitter.utils.IdGenerator;
@@ -29,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment findById(String commentId) {
-        return commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException("comment not found"));
+        return commentRepository.findById(commentId).orElseThrow( /* handle exception */ );
     }
 
     @Override
@@ -40,12 +39,12 @@ public class CommentServiceImpl implements CommentService {
             oldComment.setTimestamp(LocalDateTime.now());
 
             return commentRepository.save(oldComment);
-        }).orElseThrow(() -> new CommentNotFoundException("comment not found"));
+        }).orElseThrow( /* handle exception */ );
     }
 
     @Override
     public void delete(String commentId) {
-        commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException("comment not found"));
+        commentRepository.findById(commentId).orElseThrow( /* handle exception */ );
         commentRepository.deleteById(commentId);
     }
 

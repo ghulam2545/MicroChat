@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 public class CommentToCommentResponseDto implements Converter<Comment, CommentResponseDto> {
     @Override
     public CommentResponseDto convert(Comment source) {
-        return null;
+        return new CommentResponseDto(
+                source.getCommentId(),
+                source.getContent(),
+                source.getTimestamp(),
+                null,
+                null
+        );
     }
 }

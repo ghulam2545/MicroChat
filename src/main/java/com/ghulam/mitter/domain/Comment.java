@@ -20,9 +20,9 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User commenter;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name = "tweet_id")
-    private Tweet tweet;
+    private Tweet tweetId;
 }
