@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         long id = idGenerator.nextId();
-        user.setId(id + "");
+        user.setUserId(id + "");
         return userRepository.save(user);
     }
 

@@ -1,8 +1,12 @@
 package com.ghulam.mitter.system;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
+@Getter
+@Setter
 public class Result {
     private boolean flag;
     private Integer code;
@@ -10,7 +14,7 @@ public class Result {
     private Object payload;
 
     public Result(boolean flag, Integer code, String message) {
-        this.flag = false;
+        this.flag = flag;
         this.code = code;
         this.message = message;
     }

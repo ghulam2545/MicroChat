@@ -4,15 +4,16 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class User {
     @Id
-    private String id;
+    private String userId;
     private String username;
     private String email;
     private String password;
