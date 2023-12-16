@@ -22,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment save(Comment comment) {
         long id = idGenerator.nextId();
-        comment.setId(id + "");
+        comment.setCommentId(id + "");
         comment.setTimestamp(LocalDateTime.now());
         return commentRepository.save(comment);
     }

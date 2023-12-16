@@ -2,19 +2,27 @@ package com.ghulam.mitter.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Comment {
     @Id
-    private String id;
+    private String commentId;
     private String content;
     private LocalDateTime timestamp;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User commenter;
+
+    @ManyToOne
+    @JoinColumn(name = "tweet_id")
+    private Tweet tweet;
 }
