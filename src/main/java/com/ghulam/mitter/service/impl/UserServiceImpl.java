@@ -4,23 +4,33 @@ import com.ghulam.mitter.domain.User;
 import com.ghulam.mitter.repository.UserRepository;
 import com.ghulam.mitter.service.UserService;
 import com.ghulam.mitter.utils.IdGenerator;
+import com.ghulam.mitter.utils.UserPrinciple;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final IdGenerator idGenerator;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, IdGenerator idGenerator) {
+    public UserServiceImpl(UserRepository userRepository, IdGenerator idGenerator, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.idGenerator = idGenerator;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User save(User user) {
         final long id = idGenerator.nextId();
         user.setUserId(id + "");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles("user");
+
         return userRepository.save(user);
     }
 
@@ -53,5 +63,11 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         /* todo - implement pagination etc */
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return  userRepository.findByUsername(username).map(UserPrinciple::new)
+                .orElseThrow( /* handle exception */ );
     }
 }

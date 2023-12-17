@@ -21,6 +21,7 @@ public class User {
     private String description;
     private String country;
     private String imageUrl;
+    private String roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Tweet> tweets;

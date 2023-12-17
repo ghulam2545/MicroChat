@@ -20,7 +20,8 @@ public class UserToUserResponseDto implements Converter<User, UserResponseDto> {
                 source.getFullname(),
                 source.getDescription(),
                 source.getCountry(),
-                source.getImageUrl()
+                source.getImageUrl(),
+                source.getRoles()
         );
     }
 }

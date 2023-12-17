@@ -7,6 +7,7 @@ public record UserResponseDto(
         String fullname,
         String description,
         String country,
-        String imageUrl
+        String imageUrl,
+        String roles
 ) {
 }
