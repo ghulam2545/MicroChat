@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping
     public Result getAllUser() {
-        List<User> allUsers = userService.findAll();
+        List<UserResponseDto> allUsers = userService.findAll().stream().map(userToUserResponseDto::convert).toList();
 
         // todo
         return new Result(true, StatusCode.SUCCESS, "message - getAllUser", allUsers);

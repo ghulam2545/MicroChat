@@ -18,10 +18,7 @@ public class TweetToTweetResponseDto implements Converter<Tweet, TweetResponseDt
                 source.getContent(),
                 source.getMediaUrl(),
                 source.getTimestamp(),
-                source.getHashtags(),
-                // todo
-                null,
-                null
+                source.getHashtags()
         );
     }
 }

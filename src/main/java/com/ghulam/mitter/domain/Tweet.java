@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,8 +19,8 @@ public class Tweet {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
-    @OneToMany(mappedBy = "tweetId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL)
     private List<Comment> comments;
 }

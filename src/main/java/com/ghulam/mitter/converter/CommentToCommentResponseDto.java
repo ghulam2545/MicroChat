@@ -16,9 +16,7 @@ public class CommentToCommentResponseDto implements Converter<Comment, CommentRe
         return new CommentResponseDto(
                 source.getCommentId(),
                 source.getContent(),
-                source.getTimestamp(),
-                null,
-                null
+                source.getTimestamp()
         );
     }
 }
