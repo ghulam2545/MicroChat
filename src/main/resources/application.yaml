@@ -1,0 +1,35 @@
+# Application port
+server:
+  port: 8080
+
+# Database config
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/chat
+    username: root
+    password: ghulam
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  security:
+    user:
+      name: baba
+      password: baba
+
+# Base URL
+api:
+  endpoints:
+    base-url: /api/microchat
+
+# JWT secret key
+app:
+  security:
+    jwt:
+      secret_key: F0F1F2F3F4F5F6F7F8F9FAFBFCFDFEFF0F1F2F3F4F5F6F7F8F9FAFBFCFDFEFF
+
+# Swagger UI docs
+springdoc:
+  swagger-ui:
+    path: /docs

@@ -1,7 +1,8 @@
 package com.ghulam.microchat.dto.request;
 
-public record TweetRequest(
+public record PostRequest(
         String content,
+        String mediaUrl,
         String userId
 ) {
 }

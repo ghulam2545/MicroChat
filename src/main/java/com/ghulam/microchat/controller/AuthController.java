@@ -1,31 +1,28 @@
 package com.ghulam.microchat.controller;
 
-import com.ghulam.microchat.dto.request.SignInRequest;
-import com.ghulam.microchat.dto.request.SignUpRequest;
-import com.ghulam.microchat.dto.response.JwtAuthenticationResponse;
-import com.ghulam.microchat.service.AuthenticationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ghulam.microchat.dto.request.LoginRequest;
+import com.ghulam.microchat.dto.request.SignupRequest;
+import com.ghulam.microchat.dto.response.ResultToken;
+import com.ghulam.microchat.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping(value = "${api.endpoints.base-url}")
+@CrossOrigin("*")
 public class AuthController {
 
-    private final AuthenticationService authenticationService;
+    private final AuthService authService;
 
-    public AuthController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
+    @PostMapping("/register")
+    public ResultToken register(@RequestBody SignupRequest request) {
+        return authService.register(request);
     }
 
-    @PostMapping("/signup")
-    public JwtAuthenticationResponse signup(@RequestBody SignUpRequest request) {
-        return authenticationService.signup(request);
+    @PostMapping("/login")
+    public ResultToken login(@RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 
-    @PostMapping("/signin")
-    public JwtAuthenticationResponse login(@RequestBody SignInRequest request) {
-        return authenticationService.signin(request);
-    }
 }
