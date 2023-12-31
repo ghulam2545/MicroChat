@@ -91,7 +91,7 @@ application:
 
 MicroChat provides a comprehensive set of API endpoints for interacting with the application. The Swagger UI is integrated to facilitate easy exploration and testing of the APIs.
 Access the Swagger UI to interactively explore and test the available APIs:
-- Swagger UI: *Coming soon!*
+- Swagger UI: *[API docs](http://localhost:8080/swagger-ui/index.html)*
 
 ## Testing
 
