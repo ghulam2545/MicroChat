@@ -1,6 +1,6 @@
 # MicroChat - RESTful API
 
-MicroChat is a robust Java Spring Boot application that provides a RESTful API for a twitter like social-media platform. This platform allows users to engage in conversations through the creation of tweets, following other users, and participating in discussions through comments. The project is built using popular technologies such as Java Spring Boot, Maven, Spring Data JPA, Spring Security, and MySQL.
+MicroChat is a robust Java Spring Boot application that provides a RESTful API for a twitter like social-media platform. This platform allows users to engage in conversations through the creation of posts, following other users, and participating in discussions through comments. The project is built using popular technologies such as Java Spring Boot, Maven, Spring Data JPA, Spring Security, and MySQL.
 <br>
 
 ## Features
@@ -14,19 +14,19 @@ MicroChat is a robust Java Spring Boot application that provides a RESTful API f
 - User authentication and authorization are implemented using JWT tokens.
 - Users can securely authenticate and receive JWT tokens for accessing secured endpoints.
 
-**Tweet Operations:**
+**Post Operations:**
 
-- Users can post new tweets.
-- Tweets can be retrieved, updated, and deleted.
+- Users can post new posts.
+- Posts can be retrieved, updated, and deleted.
 
 **Like/Unlike, Follow/Unfollow mechanism** - *[ TODO ]*
 
-- Users can like and unlike tweets.
+- Users can like and unlike posts.
 - Users can follow and unfollow other users.
 
 **Comment Operations:**
 
-- Users can comment on tweets.
+- Users can comment on posts.
 - Comments can be retrieved, updated, and deleted.
 
 ## Technologies Used
