@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -58,4 +59,20 @@ public class UserServiceImpl implements UserService {
         /* todo - implement pagination etc */
         return userRepository.findAll();
     }
+
+    @Override
+    public Optional<User> findByFirstName(String firstName) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByLastName(String lastName) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByCountry(String country) {
+        return Optional.empty();
+    }
+
 }

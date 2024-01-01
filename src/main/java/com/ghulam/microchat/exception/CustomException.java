@@ -2,6 +2,7 @@ package com.ghulam.microchat.exception;
 
 import com.ghulam.microchat.utils.Result;
 import com.ghulam.microchat.utils.StatusCode;
+import org.hibernate.tool.schema.spi.CommandAcceptanceException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,5 +22,10 @@ public class CustomException {
     @ExceptionHandler(CommentNotFoundException.class)
     public Result commentNotFound(CommentNotFoundException ex) {
         return new Result(false, StatusCode.FAIL, ex.getMessage());
+    }
+
+    @ExceptionHandler(CommandAcceptanceException.class)
+    public String sqlIssue(CommandAcceptanceException ex) {
+        return "some SQL issue";
     }
 }

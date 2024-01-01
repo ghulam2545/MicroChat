@@ -19,7 +19,6 @@ public class UserToUserResponse implements Converter<User, UserResponse> {
                 source.getFirstName(),
                 source.getLastName(),
                 source.getUsername(),
-                source.getPassword(),
                 source.getCountry(),
                 linksToLinksResponse.convert(source.getLinks())
         );

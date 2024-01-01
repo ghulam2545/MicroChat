@@ -1,5 +1,6 @@
 package com.ghulam.microchat;
 
+import com.ghulam.microchat.model.Links;
 import com.ghulam.microchat.model.User;
 import com.ghulam.microchat.repository.UserRepository;
 import com.ghulam.microchat.utils.IdGenerator;
@@ -30,7 +31,7 @@ public class App implements CommandLineRunner {
 		user.setUsername("user@gmail.com");
 		user.setPassword(passwordEncoder.encode("user"));
 		user.setCountry("CHINA");
-		user.setLinks(null);
+		user.setLinks(new Links(IdGenerator.next(), "instagram.com", "facebook.com", "youtube.com"));
 
 		User admin = new User();
 		admin.setUserId(IdGenerator.next());
@@ -40,7 +41,7 @@ public class App implements CommandLineRunner {
 		admin.setUsername("admin@gmail.com");
 		admin.setPassword(passwordEncoder.encode("admin"));
 		admin.setCountry("CHINA");
-		admin.setLinks(null);
+		admin.setLinks(new Links(IdGenerator.next(), "instagram.com", "facebook.com", "youtube.com"));
 
 
 		userRepository.save(user);

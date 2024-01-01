@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "${api.endpoints.base-url}/comments")
-@CrossOrigin("*")
 public class CommentController {
 
     private final CommentService commentService;

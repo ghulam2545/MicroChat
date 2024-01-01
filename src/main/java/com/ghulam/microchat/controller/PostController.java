@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "${api.endpoints.base-url}/posts")
-@CrossOrigin("*")
 public class PostController {
 
     private final PostService postService;

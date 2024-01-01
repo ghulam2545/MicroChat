@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("${api.endpoints.base-url}")
-@CrossOrigin("*")
+@RequestMapping("${api.endpoints.base-url}/demo")
 public class DemoController {
 
     @GetMapping("/public")

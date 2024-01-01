@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    PostRepository postRepository;
+    private final PostRepository postRepository;
     private final UserService userService;
 
     @Override

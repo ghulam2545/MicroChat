@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,22 +34,28 @@ public class SpringConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request ->
                         request
-                                .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, baseUrl + "/public/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, baseUrl + "/register").permitAll()
-                                .requestMatchers(HttpMethod.POST, baseUrl + "/login").permitAll()
-                                .requestMatchers(HttpMethod.GET, baseUrl + "/user/**").hasAuthority("ROLE_USER")
-                                .requestMatchers(HttpMethod.GET, baseUrl + "/admin/**").hasAuthority("ROLE_ADMIN")
+                                /* sample endpoints */
+                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers(baseUrl + "/demo/public/**").permitAll()
+                                .requestMatchers(baseUrl + "/demo/user/**").hasAuthority("ROLE_USER")
+                                .requestMatchers(baseUrl + "/demo/admin/**").hasAuthority("ROLE_ADMIN")
+
+                                /* application endpoints - todos */
+                                .requestMatchers(baseUrl + "/auth/**").permitAll()
+                                .requestMatchers(baseUrl + "/users/**").permitAll()
+                                .requestMatchers(baseUrl + "/posts/**").permitAll()
+                                .requestMatchers(baseUrl + "/comments/**").permitAll()
+
                                 .anyRequest()
                                 .authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .authenticationProvider(authProvide())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin(Customizer.withDefaults());
+                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

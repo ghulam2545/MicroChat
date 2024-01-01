@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "${api.endpoints.base-url}")
-@CrossOrigin("*")
+@RequestMapping(value = "${api.endpoints.base-url}/auth")
 public class AuthController {
 
     private final AuthService authService;
